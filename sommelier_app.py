@@ -1,5 +1,4 @@
 import streamlit as st
-import os, signal
 from sommelier_core import get_chain
 
 # --- Configuração da página ---
@@ -30,10 +29,6 @@ with st.sidebar:
         st.session_state.clear()
         st.success("Sessão encerrada. Você pode fechar a aba.")
         st.stop()
-
-    if st.button("🛑 Fechar app"):
-        st.warning("Encerrando servidor...")
-        os.kill(os.getpid(), signal.SIGTERM)
 
 # --- Área principal do chat ---
 st.markdown(
