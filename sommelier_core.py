@@ -18,8 +18,6 @@ except Exception:
 from typing import List, Literal, Optional
 from pathlib import Path
 import sys
-from dotenv import load_dotenv
-load_dotenv()
 
 # --- 1) Configure LangSmith tracing BEFORE LangChain imports ---
 def setup_env():
