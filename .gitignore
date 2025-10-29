@@ -21,3 +21,7 @@ models/
 .ipynb_checkpoints/
 # Uncomment next line if you don't want notebooks in Git
 *.ipynb
+# Ignore vector store metadata changes
+chroma_vector_store/*
+!chroma_vector_store/*.sqlite3
+!chroma_vector_store/*.parquet
