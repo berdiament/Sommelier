@@ -3,28 +3,24 @@ Sommelier AI Assistant
 Author: Bernardo
 Description: Interactive sommelier assistant with LangChain, LangSmith tracing, and Chroma vector store.
 """
+
+# --- 1) Configure LangSmith tracing BEFORE LangChain imports ---
 import os
 try:
     import streamlit as st
     if "LANGSMITH_API_KEY" in st.secrets:
         os.environ["LANGSMITH_API_KEY"] = st.secrets["LANGSMITH_API_KEY"]
         os.environ["LANGCHAIN_TRACING"] = "true"
-        os.environ["LANGCHAIN_PROJECT"] = st.secrets.get("LANGCHAIN_PROJECT", "sommelier-bot")
+        os.environ["LANGSMITH_PROJECT"] = st.secrets.get("LANGSMITH_PROJECT", "sommelier-bot")
         os.environ["LANGCHAIN_ENDPOINT"] = st.secrets.get("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com")
 except Exception:
     from dotenv import load_dotenv
     load_dotenv()
+    os.environ["LANGSMITH_PROJECT"]  = "sommelier-bot"
 
 from typing import List, Literal, Optional
 from pathlib import Path
 import sys
-
-# --- 1) Configure LangSmith tracing BEFORE LangChain imports ---
-def setup_env():
-    os.environ["LANGSMITH_PROJECT"]  = "sommelier-bot"
-#print("LangSmith project =>", os.environ["LANGSMITH_PROJECT"])
-
-setup_env()
 
 # --- 2) Now safe to import LangChain ecosystem ---
 from dataclasses import dataclass
